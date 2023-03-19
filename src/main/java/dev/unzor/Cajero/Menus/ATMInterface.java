@@ -2,7 +2,7 @@ package dev.unzor.Cajero.Menus;
 
 import dev.unzor.Cajero.Constructors.Card;
 import dev.unzor.Cajero.Constants;
-import dev.unzor.Cajero.Util.Util;
+import dev.unzor.Cajero.Util.GetCardByID;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -136,9 +136,9 @@ public class ATMInterface {
                 double transferAmount = Double.parseDouble(transferAmountField.getText());
                 int receiverId = Integer.parseInt(receiverIdField.getText());
 
-                if (card.getBalance() >= transferAmount && Util.getCardByID(receiverId) != null) {
-                    card.transfer(transferAmount, Util.getCardByID(receiverId));
-                    int option4 = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea transferir " + transferAmount + Constants.currency + " a la cuenta con ID " + receiverId + "? (" + Util.getCardByID(receiverId).getNombre() + ")", "Confirmar Transferencia", JOptionPane.YES_NO_OPTION);
+                if (card.getBalance() >= transferAmount && GetCardByID.getCardByID(receiverId) != null) {
+                    card.transfer(transferAmount, GetCardByID.getCardByID(receiverId));
+                    int option4 = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea transferir " + transferAmount + Constants.currency + " a la cuenta con ID " + receiverId + "? (" + GetCardByID.getCardByID(receiverId).getNombre() + ")", "Confirmar Transferencia", JOptionPane.YES_NO_OPTION);
 
                     if (option4 == JOptionPane.YES_OPTION) {
                         JOptionPane.showMessageDialog(null, "Transferencia Exitosa. Su Saldo Actual es: " + card.getBalance() + Constants.currency);

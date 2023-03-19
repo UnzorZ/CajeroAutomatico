@@ -1,7 +1,7 @@
 package dev.unzor.Cajero.Menus;
 
 import dev.unzor.Cajero.Constructors.Card;
-import dev.unzor.Cajero.Util.Util;
+import dev.unzor.Cajero.Util.GetCardByID;
 
 import javax.swing.*;
 import java.awt.*;
@@ -98,7 +98,7 @@ public class ChangePinGUI extends JFrame {
         // Change PIN button action listener
         changePinButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Card target = Util.getCardByID(Integer.parseInt(cardIdTextField.getText()));
+                Card target = GetCardByID.getCardByID(Integer.parseInt(cardIdTextField.getText()));
                 try {
                     target.changePin(Integer.parseInt(charToString(currentPinPasswordField.getPassword())), charToString(newPinPasswordField.getPassword()), charToString(confirmPinPasswordField.getPassword()));
                     JOptionPane.showMessageDialog(null, "Ha actualizado su PIN correctamente");

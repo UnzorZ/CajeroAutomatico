@@ -4,8 +4,8 @@ import dev.unzor.Cajero.Menus.ConfigGUI;
 import dev.unzor.Cajero.Menus.LoginGUI;
 import dev.unzor.Cajero.Menus.TarjetasTableGUI;
 import dev.unzor.Cajero.Menus.TransactionsTableGUI;
+import dev.unzor.Cajero.Util.GetCardsAsArrayList;
 import dev.unzor.Cajero.Util.SQLiteDB;
-import dev.unzor.Cajero.Util.Util;
 
 import java.sql.SQLException;
 
@@ -38,6 +38,6 @@ public class Main {
         SQLiteDB.createTable();
         LoginGUI loginGUI = new LoginGUI();
         loginGUI.setVisible(true);
-        Util.getCardsAsArrayList();
+        GetCardsAsArrayList.getCardsAsArrayList();
     }
 }

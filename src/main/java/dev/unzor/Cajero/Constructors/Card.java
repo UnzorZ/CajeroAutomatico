@@ -1,7 +1,7 @@
 package dev.unzor.Cajero.Constructors;
 
 import dev.unzor.Cajero.Constants;
-import dev.unzor.Cajero.Util.Util;
+import dev.unzor.Cajero.Util.ExportCardToDatabase;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -28,7 +28,7 @@ public class Card {
     }
     public void setId(int id) throws SQLException {
         this.id = id;
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public int getPin() {
@@ -36,7 +36,7 @@ public class Card {
     }
     public void setPin(int pin) throws SQLException {
         this.pin = pin;
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
     public double getBalance() {
         return balance;
@@ -44,7 +44,7 @@ public class Card {
 
     public void setBalance(double balance) throws SQLException {
         this.balance = balance;
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public boolean isBlocked() {
@@ -53,7 +53,7 @@ public class Card {
 
     public void setBlocked(boolean blocked) throws SQLException {
         this.isBlocked = blocked;
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public boolean checkPin(int pin) {
@@ -70,7 +70,7 @@ public class Card {
 
     public void setNombre(String nombre) throws SQLException {
         this.nombre = nombre;
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     // Otros métodos de la clase Card, como depositar, retirar, transferir, etc.
@@ -80,7 +80,7 @@ public class Card {
             this.balance -= amount;
             addTransaction(id, "Retirada", amount, balance);
         }
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public void deposit(double amount) throws SQLException {
@@ -88,7 +88,7 @@ public class Card {
             this.balance += amount;
             addTransaction(id, "Depósito", amount, balance);
         }
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public void transfer(double amount, Card recipient) throws SQLException {
@@ -98,7 +98,7 @@ public class Card {
             addTransaction(id, "Transferencia -"  + Constants.currency, amount, balance);
             addTransaction(recipient.id, "Transferencia +" + Constants.currency, amount, recipient.balance);
         }
-        Util.exportCardToDatabase(this);
+        ExportCardToDatabase.exportCardToDatabase(this);
     }
 
     public static void addTransaction(int id_usuario, String tipo, double cantidad, double saldo_restante) throws SQLException {
@@ -138,7 +138,7 @@ public class Card {
             if (newPin.equals(confirmPin)) {
                 this.setPin(Integer.parseInt(newPin));
                 // actualiza el pin en la base de datos
-                Util.exportCardToDatabase(this);
+                ExportCardToDatabase.exportCardToDatabase(this);
                 System.out.println("Pin actualizado correctamente.");
             } else {
                 System.out.println("El nuevo pin no coincide con la confirmación.");
@@ -151,5 +151,4 @@ public class Card {
             System.out.println("Pin confirmacion2: " + confirmPin);
         }
     }
-
 }

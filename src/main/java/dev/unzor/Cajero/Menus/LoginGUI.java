@@ -1,7 +1,8 @@
 package dev.unzor.Cajero.Menus;
 
 import dev.unzor.Cajero.Constants;
-import dev.unzor.Cajero.Util.Util;
+import dev.unzor.Cajero.Util.GetCardsCount;
+import dev.unzor.Cajero.Util.GetCardByID;
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,14 +89,14 @@ public class LoginGUI extends JFrame implements ActionListener {
                     // Inicio de sesión exitoso
                     JOptionPane.showMessageDialog(this, "Bienvenido, " + name + "! Su saldo es: " + balance + Constants.currency);
                     dispose();
-                    new ATMInterface(Util.getCardByID(Integer.parseInt(id)));
+                    new ATMInterface(GetCardByID.getCardByID(Integer.parseInt(id)));
                 } else {
                     // PIN incorrecto
                     pinAttempts++;
                     if (pinAttempts >= MAX_PIN_ATTEMPTS) {
                         // Bloquear la tarjeta después de intentos fallidos
                         stmt.executeUpdate("UPDATE TARJETAS SET bloqueada=1 WHERE id='" + id + "'");
-                        Util.getCardByID(Integer.parseInt(id)).setBlocked(true);
+                        GetCardByID.getCardByID(Integer.parseInt(id)).setBlocked(true);
                         JOptionPane.showMessageDialog(this, "La tarjeta ha sido bloqueada. Por favor, contacte al banco.");
                     } else {
                        JOptionPane.showMessageDialog(this, "PIN incorrecto. Intentos restantes: " + (MAX_PIN_ATTEMPTS - pinAttempts));
@@ -123,7 +124,7 @@ public class LoginGUI extends JFrame implements ActionListener {
         }
     }
     public void RegisterGUI() throws SQLException {
-        int id = Util.getCardsCount() + 1;
+        int id = GetCardsCount.getCardsCount() + 1;
         String name = JOptionPane.showInputDialog(null, "Ingrese el nombre del titular de la tarjeta:", "Agregar registro", JOptionPane.PLAIN_MESSAGE);
         String pinStr = JOptionPane.showInputDialog(null, "Ingrese el PIN de la tarjeta:", "Agregar registro", JOptionPane.PLAIN_MESSAGE);
         int pin = Integer.parseInt(pinStr);
