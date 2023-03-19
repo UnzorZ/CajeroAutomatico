@@ -24,6 +24,7 @@ public class Main {
                         break;
                     case "-ayuda":
                         System.out.println("[-admin] - Abre la interfaz de administrador");
+                        System.out.println("[-config] - Abre la configuración de la aplicación");
                         System.out.println("[-ayuda] - Muestra esta ayuda");
                         break;
                     case "-config":
